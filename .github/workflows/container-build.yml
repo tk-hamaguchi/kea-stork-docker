@@ -23,7 +23,8 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: .
-          platforms: linux/amd64,linux/arm64
+          file: ContainerFile.slim
+          platforms: linux/x86_64,linux/arm64
           # push: true
           # tags: |
           #   user/app:latest
