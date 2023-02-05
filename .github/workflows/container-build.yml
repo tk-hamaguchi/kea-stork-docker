@@ -12,7 +12,10 @@ jobs:
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
       - name: Set up Docker Buildx
+        id: buildx
         uses: docker/setup-buildx-action@v2
+        with:
+          platforms: linux/amd64,linux/arm64
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v2
         with:
@@ -22,13 +25,15 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v4
         with:
+          builder: ${{ steps.buildx.outputs.name }}
           context: .
           file: ContainerFile.slim
-          platforms: linux/x86_64,linux/arm64
+          platforms: ${{ steps.buildx.outputs.platforms }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
           # push: true
           # tags: |
           #   user/app:latest
           #   user/app:1.0.0
           #   ghcr.io/user/app:latest
           #   ghcr.io/user/app:1.0.0
-
