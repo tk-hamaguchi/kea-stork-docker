@@ -4,7 +4,7 @@ on:
   - push
 
 jobs:
-  build_and_test:
+  build_image_and_push:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -32,9 +32,6 @@ jobs:
           platforms: ${{ steps.buildx.outputs.platforms }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
-          # push: true
-          # tags: |
-          #   user/app:latest
-          #   user/app:1.0.0
-          #   ghcr.io/user/app:latest
-          #   ghcr.io/user/app:1.0.0
+          push: true
+          tags: |
+            ghcr.io/tk-hamaguchi/kea-stork:latest
