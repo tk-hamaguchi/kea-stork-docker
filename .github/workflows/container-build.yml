@@ -34,4 +34,5 @@ jobs:
           cache-to: type=gha,mode=max
           push: true
           tags: |
-            ghcr.io/tk-hamaguchi/kea-stork:latest
+            ghcr.io/tk-hamaguchi/kea-stork:bullseye-slim
+            ghcr.io/tk-hamaguchi/kea-stork
